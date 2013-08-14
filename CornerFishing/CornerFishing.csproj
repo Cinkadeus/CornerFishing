@@ -134,7 +134,6 @@
     <Content Include="Content\images\logo2.png" />
     <Content Include="Content\menu.css" />
     <Content Include="Global.asax" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="js\menu.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
