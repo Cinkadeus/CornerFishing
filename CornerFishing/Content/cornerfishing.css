@@ -58,13 +58,32 @@ table {
 	background:url(../Content/images/logo.png) no-repeat;
 }
 
-td {
+.std {
     padding-top: 4px;
     padding-bottom: 4px;
     text-align: center;
     width: 100px;
     border-top: 1px solid #C19E9E;
 }
+
+.team a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.team {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 200px;
+    border-top: 1px solid #C19E9E;
+}
+
+#standings {
+
+
+}
+
+
 
 
 
