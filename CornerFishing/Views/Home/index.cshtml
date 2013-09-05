@@ -11,15 +11,13 @@
 </script>
 
 <h2>Current Season Standings</h2>
+
 <div>
+
 	<div class="section">
-		<b>After |USE LAST EVENT PROCEDURE HERE|</b>
-
-		@*This section will be replaced by RAZOR code to loop through DB recs and create this table on the fly.*@
-
-		
-		@*Testing GitHub*@
-			
+        
+        <b>Overall Point Totals as of @fish.sp_GetLastEvent().FirstOrDefault()</b>
+        			
 		<table class="standings">
 			<thead>
 				<tr class="srow">
@@ -43,34 +41,67 @@
 		</table>
 
 	</div>
+
 </div>
 
 			
-			<h2>Test News Item #1</h2>
-			<div>
-				<div class="section">
-					<img src="http://www.bassfishingnerds.com/wp-content/uploads/night-bass-fishing.jpg" style="max-height:400px" />
-					<b>This is just a place holder, so you can see what the site would look like.</b>
-					<p>
-						Timothy Dattels, who will chair the committee, said 'the evolving industry and competitive landscape' meant it was the right time to explore such options.
-Prem Watsa, chief executive of BlackBerry's largest shareholder Fairfax Financial, stepped down from the board 'due to potential conflicts that may arise during the process', the statement said.
-Mr Watsa said Fairfax 'has no current intention of selling its shares'. 
-BlackBerry chief executive Thorsten Heins added that there were still 'compelling long-term opportunities' for its new phones and it was pursuing cost-cutting, efficiency and the launch of new technology.
-					</p>
-					<p>
-						Cras tincidunt tortor vel arcu pharetra et molestie enim vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer non nulla nec nunc interdum imperdiet non vitae dui. Aliquam vulputate augue in odio egestas tincidunt. Integer eget tortor ligula. Vestibulum dictum scelerisque justo nec cursus. Donec euismod placerat lligula, vitae faucibus enim adipiscing sed. Nullam nec magna diam, id cursus justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.Phasellus sagittis eros quam, in tincidunt nisl. Nullam porta, tellus venenatis sodales semper, arcu massa lobortis orci, eu lobortis massa lectus id magna. Nullam sodales ipsum in massa consectetur sollicitudin in ac lorem. Sed vel enim arcu.
-					</p>
+<h2>Test News Item #1</h2>
+<div>
+	<div class="section">
 
-				</div>
-			</div>
+		<img src="http://www.bassfishingnerds.com/wp-content/uploads/night-bass-fishing.jpg" style="max-height:400px" />
 
-			<h2>Sample Results set from an event</h2>
-			<div>
-				<div class="section">
-					<b>Results of something.  The text all means nothing.</b>
+		<p>
+            This will be news Text
+		</p>
 
-						
+	</div>
+</div>
 
+<h2>Results of Last Recorded Event</h2>
+<div>
+	<div class="section">
+		<b>Weights and Points of @fish.sp_GetLastEvent().FirstOrDefault()</b>
+
+        <table class="standings">
+			<thead>
+				<tr class="srow">
+					<th>Place</th>
+					<th>Team</th>
+                    <th>Fish<br />Count</th>
+                    <th>Big Fish</th>
+                    <th>Total Wgt</th>
+                    <th>Points</th>
+                    <th>Bonus</th>
+					<th>Total<br />Points</th>
+				</tr>
+			</thead>
+
+            @foreach (var result in fish.sp_GetEventResults(0) )
+            {
+                
+            <tr>
+				<td class="std">@result.Place</td>
+				<td class="std">@result.TeamName</td>
+                <td class="std">@result.FishCount</td>
+                @if (result.BigFishFlag == 1)
+                {
+                    <td class="std" style="font-weight:bolder; width:150px">@result.BigFish</td>
+                }
+                else
+                {          
+                    <td class="std" style="width:150px">@result.BigFish</td>
+                }
+                
+                <td class="std" style="width:150px">@result.TotalWeight </td>
+                <td class="std">@result.Points </td>
+                <td class="std">@result.BonusPoints </td>
+				<td class="std">@result.TotalPoints</td>
+			</tr>
+            
+            }
+
+		</table>
 					
-				</div>
-			</div>
+	</div>
+</div>
