@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="fishingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="fishingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="fishingModelStoreContainer">
           <EntitySet Name="Events" EntityType="fishingModel.Store.Events" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="News" EntityType="fishingModel.Store.News" store:Type="Tables" Schema="dbo" />
@@ -107,8 +107,7 @@
         <Function Name="sp_GetLastEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetNextEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetPointTotals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="fishingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -127,7 +126,7 @@
             <End Role="Results" EntitySet="Results" />
           </AssociationSet>
           <FunctionImport Name="sp_GetEventResults" ReturnType="Collection(fishingModel.sp_GetEventResults_Result)">
-            <Parameter Name="EventID" Mode="In" Type="Int32" />
+          <Parameter Name="EventID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetLastEvent" ReturnType="Collection(String)" />
           <FunctionImport Name="sp_GetNextEvent" ReturnType="Collection(String)" />
@@ -232,6 +231,7 @@
         <ComplexType Name="sp_GetPointTotals_Result">
           <Property Type="Int64" Name="Place" Nullable="true" />
           <Property Type="String" Name="TeamName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="Int32" Name="TotalPoints" Nullable="true" />
         </ComplexType>
       </Schema>
@@ -324,6 +324,7 @@
               <ComplexTypeMapping TypeName="fishingModel.sp_GetPointTotals_Result">
                 <ScalarProperty Name="Place" ColumnName="Place" />
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
               </ComplexTypeMapping>
             </ResultMapping>

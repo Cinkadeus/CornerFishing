@@ -15,6 +15,7 @@ namespace CornerFishing.Models
     {
         public Nullable<long> Place { get; set; }
         public string TeamName { get; set; }
+        public int id { get; set; }
         public Nullable<int> TotalPoints { get; set; }
     }
 }

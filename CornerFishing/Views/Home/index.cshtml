@@ -1,7 +1,7 @@
 ﻿@{
 	ViewBag.Title = "Corner Fishing Home";
 	Layout = "~/Views/Shared/_default.cshtml";
-	fishingDataEntity fish = new fishingDataEntity 
+    fishingDataEntity fish = new fishingDataEntity();
 }
 
 @using CornerFishing.Models 
@@ -17,7 +17,7 @@
 
 		@*This section will be replaced by RAZOR code to loop through DB recs and create this table on the fly.*@
 
-        
+		
 		@*Testing GitHub*@
 			
 		<table class="standings">
@@ -28,31 +28,18 @@
 					<th>Total<br />Points</th>
 				</tr>
 			</thead>
-			<tr>
-				<td class="std">1</td>
-				<td class="team"><a href='#'>Averhart/Rodgers</a></td>
-				<td class="std">250</td>
+
+            @foreach (var team in fish.sp_GetPointTotals() )
+            {
+                
+            <tr>
+				<td class="std">@team.Place </td>
+				<td class="team"><a href='@Url.Action("teamhome", "Home", new { id = team.id})'>@team.TeamName</a></td>
+				<td class="std">@team.TotalPoints</td>
 			</tr>
-			<tr>
-				<td class="std">2</td>
-				<td class="team">Bainbridge/Jennings</td>
-				<td class="std">80</td>
-			</tr>
-			<tr>
-				<td class="std">3</td>
-				<td class="team">Boshell/Savage</td>
-				<td class="std">210</td>
-			</tr>
-			<tr>
-				<td class="std">4</td>
-				<td class="team">Bowman/Kuykendall</td>
-				<td class="std">340</td>
-			</tr>
-			<tr>
-				<td class="std">5</td>
-				<td class="team">Bowman/Kuykendall</td>
-				<td class="std">340</td>
-			</tr>
+            
+            }
+
 		</table>
 
 	</div>
