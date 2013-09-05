@@ -71,6 +71,10 @@ table {
     text-decoration: none;
 }
 
+.team a:hover {
+    color: darkslategrey 
+}
+
 .team {
     padding-top: 4px;
     padding-bottom: 4px;
@@ -82,10 +86,6 @@ table {
 
 
 }
-
-
-
-
 
 #navigation {
 	list-style-type:none;
