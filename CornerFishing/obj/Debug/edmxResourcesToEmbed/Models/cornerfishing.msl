@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB_9AA125_cornerfishingModelStoreContainer" CdmEntityContainer="cornerfishingEntities">
+  <EntityContainerMapping StorageEntityContainer="DB_9AA125_cornerfishingModelStoreContainer" CdmEntityContainer="fishingEntities">
     <EntitySetMapping Name="Events">
-      <EntityTypeMapping TypeName="cornerfishingdb.Event">
+      <EntityTypeMapping TypeName="fishingdb.Event">
         <MappingFragment StoreEntitySet="Events">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="EventName" ColumnName="EventName" />
@@ -13,7 +13,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="News">
-      <EntityTypeMapping TypeName="cornerfishingdb.News">
+      <EntityTypeMapping TypeName="fishingdb.News">
         <MappingFragment StoreEntitySet="News">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Headline" ColumnName="Headline" />
@@ -27,7 +27,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Results">
-      <EntityTypeMapping TypeName="cornerfishingdb.Result">
+      <EntityTypeMapping TypeName="fishingdb.Result">
         <MappingFragment StoreEntitySet="Results">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="EventID" ColumnName="EventID" />
@@ -43,7 +43,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Sponsors">
-      <EntityTypeMapping TypeName="cornerfishingdb.Sponsor">
+      <EntityTypeMapping TypeName="fishingdb.Sponsor">
         <MappingFragment StoreEntitySet="Sponsors">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Sponsor1" ColumnName="Sponsor" />
@@ -56,7 +56,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Teams">
-      <EntityTypeMapping TypeName="cornerfishingdb.Team">
+      <EntityTypeMapping TypeName="fishingdb.Team">
         <MappingFragment StoreEntitySet="Teams">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TeamName" ColumnName="TeamName" />
@@ -65,7 +65,7 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_GetEventResults" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetEventResults">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="cornerfishingdb.sp_GetEventResults_Result">
+        <ComplexTypeMapping TypeName="fishingdb.sp_GetEventResults_Result">
           <ScalarProperty Name="Place" ColumnName="Place" />
           <ScalarProperty Name="TeamName" ColumnName="TeamName" />
           <ScalarProperty Name="FishCount" ColumnName="FishCount" />
@@ -82,7 +82,7 @@
     <FunctionImportMapping FunctionImportName="sp_GetNextEvent" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetNextEvent" />
     <FunctionImportMapping FunctionImportName="sp_GetPointTotals" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetPointTotals">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="cornerfishingdb.sp_GetPointTotals_Result">
+        <ComplexTypeMapping TypeName="fishingdb.sp_GetPointTotals_Result">
           <ScalarProperty Name="Place" ColumnName="Place" />
           <ScalarProperty Name="TeamName" ColumnName="TeamName" />
           <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />

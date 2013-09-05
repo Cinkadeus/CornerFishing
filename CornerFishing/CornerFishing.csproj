@@ -122,41 +122,41 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\cornerfishing.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>cornerfishing.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\cornerfishing.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>cornerfishing.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\cornerfishing.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>cornerfishing.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Event.cs">
-      <DependentUpon>cornerfishing.tt</DependentUpon>
+      <DependentUpon>fishingdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fishingdb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fishingdb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fishingdb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fishingdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fishingdb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fishingdb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\News.cs">
-      <DependentUpon>cornerfishing.tt</DependentUpon>
+      <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Result.cs">
-      <DependentUpon>cornerfishing.tt</DependentUpon>
+      <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sponsor.cs">
-      <DependentUpon>cornerfishing.tt</DependentUpon>
+      <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_GetEventResults_Result.cs">
-      <DependentUpon>cornerfishing.tt</DependentUpon>
+      <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_GetPointTotals_Result.cs">
-      <DependentUpon>cornerfishing.tt</DependentUpon>
+      <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Team.cs">
-      <DependentUpon>cornerfishing.tt</DependentUpon>
+      <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -216,28 +216,28 @@
     <Content Include="Views\Shared\_standings.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\cornerfishing.edmx">
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\fishingdb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>cornerfishing.Designer.cs</LastGenOutput>
+      <LastGenOutput>fishingdb.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\cornerfishing.Context.tt">
+    <Content Include="Models\fishingdb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cornerfishing.edmx</DependentUpon>
-      <LastGenOutput>cornerfishing.Context.cs</LastGenOutput>
+      <DependentUpon>fishingdb.edmx</DependentUpon>
+      <LastGenOutput>fishingdb.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\cornerfishing.edmx.diagram">
-      <DependentUpon>cornerfishing.edmx</DependentUpon>
+    <Content Include="Models\fishingdb.edmx.diagram">
+      <DependentUpon>fishingdb.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\cornerfishing.tt">
+    <Content Include="Models\fishingdb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>cornerfishing.edmx</DependentUpon>
-      <LastGenOutput>cornerfishing.cs</LastGenOutput>
+      <DependentUpon>fishingdb.edmx</DependentUpon>
+      <LastGenOutput>fishingdb.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
