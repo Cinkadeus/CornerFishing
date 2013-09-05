@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="cornerfishingdb" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="cornerfishingEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+    <EntitySet Name="Events" EntityType="cornerfishingdb.Event" />
+    <EntitySet Name="News" EntityType="cornerfishingdb.News" />
+    <EntitySet Name="Results" EntityType="cornerfishingdb.Result" />
+    <EntitySet Name="Sponsors" EntityType="cornerfishingdb.Sponsor" />
+    <EntitySet Name="Teams" EntityType="cornerfishingdb.Team" />
+    <AssociationSet Name="FK_Results_ToEvents" Association="cornerfishingdb.FK_Results_ToEvents">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Results_ToTeams" Association="cornerfishingdb.FK_Results_ToTeams">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+    <FunctionImport Name="sp_GetEventResults" ReturnType="Collection(cornerfishingdb.sp_GetEventResults_Result)">
+      <Parameter Name="EventID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetLastEvent" ReturnType="Collection(String)" />
+    <FunctionImport Name="sp_GetNextEvent" ReturnType="Collection(String)" />
+    <FunctionImport Name="sp_GetPointTotals" ReturnType="Collection(cornerfishingdb.sp_GetPointTotals_Result)" />
+  </EntityContainer>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="EventDate" Type="DateTime" Precision="0" />
+    <Property Name="EventTime" Type="Time" Precision="0" />
+    <Property Name="Location" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Results" Relationship="cornerfishingdb.FK_Results_ToEvents" FromRole="Events" ToRole="Results" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Headline" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="NewsText" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="NewsDate" Type="DateTime" Precision="0" />
+    <Property Name="Order" Type="Int32" />
+    <Property Name="EventID" Type="Int32" />
+    <Property Name="ImageLink" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="FrontPage" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Result">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="TeamID" Type="Int32" Nullable="false" />
+    <Property Name="FishCount" Type="Int32" />
+    <Property Name="BigFishlbs" Type="Int32" />
+    <Property Name="BigFishOz" Type="Int32" />
+    <Property Name="Totallbs" Type="Int32" />
+    <Property Name="TotalOz" Type="Int32" />
+    <Property Name="Points" Type="Int32" />
+    <Property Name="BonusPoints" Type="Int32" />
+    <NavigationProperty Name="Event" Relationship="cornerfishingdb.FK_Results_ToEvents" FromRole="Results" ToRole="Events" />
+    <NavigationProperty Name="Team" Relationship="cornerfishingdb.FK_Results_ToTeams" FromRole="Results" ToRole="Teams" />
+  </EntityType>
+  <EntityType Name="Sponsor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sponsor1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="LogoPath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="Notes" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="URL" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Results" Relationship="cornerfishingdb.FK_Results_ToTeams" FromRole="Teams" ToRole="Results" />
+  </EntityType>
+  <Association Name="FK_Results_ToEvents">
+    <End Role="Events" Type="cornerfishingdb.Event" Multiplicity="1" />
+    <End Role="Results" Type="cornerfishingdb.Result" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Results_ToTeams">
+    <End Role="Teams" Type="cornerfishingdb.Team" Multiplicity="1" />
+    <End Role="Results" Type="cornerfishingdb.Result" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="TeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_GetEventResults_Result">
+    <Property Type="Int64" Name="Place" Nullable="true" />
+    <Property Type="String" Name="TeamName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="FishCount" Nullable="true" />
+    <Property Type="String" Name="BigFish" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="TotalWeight" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="Points" Nullable="true" />
+    <Property Type="Int32" Name="BonusPoints" Nullable="true" />
+    <Property Type="Int32" Name="TotalPoints" Nullable="true" />
+    <Property Type="Int32" Name="BigFishFlag" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetPointTotals_Result">
+    <Property Type="Int64" Name="Place" Nullable="true" />
+    <Property Type="String" Name="TeamName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="TotalPoints" Nullable="true" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_9AA125_cornerfishingModelStoreContainer" CdmEntityContainer="cornerfishingEntities">
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="cornerfishingdb.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="cornerfishingdb.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Headline" ColumnName="Headline" />
+          <ScalarProperty Name="NewsText" ColumnName="NewsText" />
+          <ScalarProperty Name="NewsDate" ColumnName="NewsDate" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+          <ScalarProperty Name="FrontPage" ColumnName="FrontPage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Results">
+      <EntityTypeMapping TypeName="cornerfishingdb.Result">
+        <MappingFragment StoreEntitySet="Results">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="FishCount" ColumnName="FishCount" />
+          <ScalarProperty Name="BigFishlbs" ColumnName="BigFishlbs" />
+          <ScalarProperty Name="BigFishOz" ColumnName="BigFishOz" />
+          <ScalarProperty Name="Totallbs" ColumnName="Totallbs" />
+          <ScalarProperty Name="TotalOz" ColumnName="TotalOz" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sponsors">
+      <EntityTypeMapping TypeName="cornerfishingdb.Sponsor">
+        <MappingFragment StoreEntitySet="Sponsors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sponsor1" ColumnName="Sponsor" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="cornerfishingdb.Team">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEventResults" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetEventResults">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="cornerfishingdb.sp_GetEventResults_Result">
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="FishCount" ColumnName="FishCount" />
+          <ScalarProperty Name="BigFish" ColumnName="BigFish" />
+          <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+          <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+          <ScalarProperty Name="BigFishFlag" ColumnName="BigFishFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetLastEvent" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetLastEvent" />
+    <FunctionImportMapping FunctionImportName="sp_GetNextEvent" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetNextEvent" />
+    <FunctionImportMapping FunctionImportName="sp_GetPointTotals" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetPointTotals">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="cornerfishingdb.sp_GetPointTotals_Result">
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

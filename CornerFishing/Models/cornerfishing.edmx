@@ -111,27 +111,27 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DB_9AA125_cornerfishingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="DB_9AA125_cornerfishingEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Events" EntityType="DB_9AA125_cornerfishingModel.Event" />
-          <EntitySet Name="News" EntityType="DB_9AA125_cornerfishingModel.News" />
-          <EntitySet Name="Results" EntityType="DB_9AA125_cornerfishingModel.Result" />
-          <EntitySet Name="Sponsors" EntityType="DB_9AA125_cornerfishingModel.Sponsor" />
-          <EntitySet Name="Teams" EntityType="DB_9AA125_cornerfishingModel.Team" />
-          <AssociationSet Name="FK_Results_ToEvents" Association="DB_9AA125_cornerfishingModel.FK_Results_ToEvents">
+      <Schema Namespace="cornerfishingdb" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="cornerfishingEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <EntitySet Name="Events" EntityType="cornerfishingdb.Event" />
+          <EntitySet Name="News" EntityType="cornerfishingdb.News" />
+          <EntitySet Name="Results" EntityType="cornerfishingdb.Result" />
+          <EntitySet Name="Sponsors" EntityType="cornerfishingdb.Sponsor" />
+          <EntitySet Name="Teams" EntityType="cornerfishingdb.Team" />
+          <AssociationSet Name="FK_Results_ToEvents" Association="cornerfishingdb.FK_Results_ToEvents">
             <End Role="Events" EntitySet="Events" />
             <End Role="Results" EntitySet="Results" />
           </AssociationSet>
-          <AssociationSet Name="FK_Results_ToTeams" Association="DB_9AA125_cornerfishingModel.FK_Results_ToTeams">
+          <AssociationSet Name="FK_Results_ToTeams" Association="cornerfishingdb.FK_Results_ToTeams">
             <End Role="Teams" EntitySet="Teams" />
             <End Role="Results" EntitySet="Results" />
           </AssociationSet>
-          <FunctionImport Name="sp_GetEventResults" ReturnType="Collection(DB_9AA125_cornerfishingModel.sp_GetEventResults_Result)">
+          <FunctionImport Name="sp_GetEventResults" ReturnType="Collection(cornerfishingdb.sp_GetEventResults_Result)">
             <Parameter Name="EventID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetLastEvent" ReturnType="Collection(String)" />
           <FunctionImport Name="sp_GetNextEvent" ReturnType="Collection(String)" />
-          <FunctionImport Name="sp_GetPointTotals" ReturnType="Collection(DB_9AA125_cornerfishingModel.sp_GetPointTotals_Result)" />
+          <FunctionImport Name="sp_GetPointTotals" ReturnType="Collection(cornerfishingdb.sp_GetPointTotals_Result)" />
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -142,7 +142,7 @@
           <Property Name="EventDate" Type="DateTime" Precision="0" />
           <Property Name="EventTime" Type="Time" Precision="0" />
           <Property Name="Location" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Results" Relationship="DB_9AA125_cornerfishingModel.FK_Results_ToEvents" FromRole="Events" ToRole="Results" />
+          <NavigationProperty Name="Results" Relationship="cornerfishingdb.FK_Results_ToEvents" FromRole="Events" ToRole="Results" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -171,8 +171,8 @@
           <Property Name="TotalOz" Type="Int32" />
           <Property Name="Points" Type="Int32" />
           <Property Name="BonusPoints" Type="Int32" />
-          <NavigationProperty Name="Event" Relationship="DB_9AA125_cornerfishingModel.FK_Results_ToEvents" FromRole="Results" ToRole="Events" />
-          <NavigationProperty Name="Team" Relationship="DB_9AA125_cornerfishingModel.FK_Results_ToTeams" FromRole="Results" ToRole="Teams" />
+          <NavigationProperty Name="Event" Relationship="cornerfishingdb.FK_Results_ToEvents" FromRole="Results" ToRole="Events" />
+          <NavigationProperty Name="Team" Relationship="cornerfishingdb.FK_Results_ToTeams" FromRole="Results" ToRole="Teams" />
         </EntityType>
         <EntityType Name="Sponsor">
           <Key>
@@ -192,11 +192,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Results" Relationship="DB_9AA125_cornerfishingModel.FK_Results_ToTeams" FromRole="Teams" ToRole="Results" />
+          <NavigationProperty Name="Results" Relationship="cornerfishingdb.FK_Results_ToTeams" FromRole="Teams" ToRole="Results" />
         </EntityType>
         <Association Name="FK_Results_ToEvents">
-          <End Role="Events" Type="DB_9AA125_cornerfishingModel.Event" Multiplicity="1" />
-          <End Role="Results" Type="DB_9AA125_cornerfishingModel.Result" Multiplicity="*" />
+          <End Role="Events" Type="cornerfishingdb.Event" Multiplicity="1" />
+          <End Role="Results" Type="cornerfishingdb.Result" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Events">
               <PropertyRef Name="Id" />
@@ -207,8 +207,16 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Results_ToTeams">
-          <End Role="Teams" Type="DB_9AA125_cornerfishingModel.Team" Multiplicity="1" />
-          <End Role="Results" Type="DB_9AA125_cornerfishingModel.Result" Multiplicity="*" />
+          <End Role="Teams" Type="cornerfishingdb.Team" Multiplicity="1" />
+          <End Role="Results" Type="cornerfishingdb.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <ComplexType Name="sp_GetEventResults_Result">
           <Property Type="Int64" Name="Place" Nullable="true" />
@@ -231,9 +239,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB_9AA125_cornerfishingModelStoreContainer" CdmEntityContainer="DB_9AA125_cornerfishingEntities">
+        <EntityContainerMapping StorageEntityContainer="DB_9AA125_cornerfishingModelStoreContainer" CdmEntityContainer="cornerfishingEntities">
           <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="DB_9AA125_cornerfishingModel.Event">
+            <EntityTypeMapping TypeName="cornerfishingdb.Event">
               <MappingFragment StoreEntitySet="Events">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="EventName" ColumnName="EventName" />
@@ -244,7 +252,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="DB_9AA125_cornerfishingModel.News">
+            <EntityTypeMapping TypeName="cornerfishingdb.News">
               <MappingFragment StoreEntitySet="News">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Headline" ColumnName="Headline" />
@@ -258,7 +266,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Results">
-            <EntityTypeMapping TypeName="DB_9AA125_cornerfishingModel.Result">
+            <EntityTypeMapping TypeName="cornerfishingdb.Result">
               <MappingFragment StoreEntitySet="Results">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
@@ -274,7 +282,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sponsors">
-            <EntityTypeMapping TypeName="DB_9AA125_cornerfishingModel.Sponsor">
+            <EntityTypeMapping TypeName="cornerfishingdb.Sponsor">
               <MappingFragment StoreEntitySet="Sponsors">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Sponsor1" ColumnName="Sponsor" />
@@ -287,7 +295,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teams">
-            <EntityTypeMapping TypeName="DB_9AA125_cornerfishingModel.Team">
+            <EntityTypeMapping TypeName="cornerfishingdb.Team">
               <MappingFragment StoreEntitySet="Teams">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
@@ -296,7 +304,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_GetEventResults" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetEventResults">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_9AA125_cornerfishingModel.sp_GetEventResults_Result">
+              <ComplexTypeMapping TypeName="cornerfishingdb.sp_GetEventResults_Result">
                 <ScalarProperty Name="Place" ColumnName="Place" />
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
                 <ScalarProperty Name="FishCount" ColumnName="FishCount" />
@@ -313,7 +321,7 @@
           <FunctionImportMapping FunctionImportName="sp_GetNextEvent" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetNextEvent" />
           <FunctionImportMapping FunctionImportName="sp_GetPointTotals" FunctionName="DB_9AA125_cornerfishingModel.Store.sp_GetPointTotals">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_9AA125_cornerfishingModel.sp_GetPointTotals_Result">
+              <ComplexTypeMapping TypeName="cornerfishingdb.sp_GetPointTotals_Result">
                 <ScalarProperty Name="Place" ColumnName="Place" />
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
                 <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />

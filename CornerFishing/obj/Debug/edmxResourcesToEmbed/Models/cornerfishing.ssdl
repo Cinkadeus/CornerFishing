@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_9AA125_cornerfishingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DB_9AA125_cornerfishingModelStoreContainer">
+    <EntitySet Name="Events" EntityType="DB_9AA125_cornerfishingModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="News" EntityType="DB_9AA125_cornerfishingModel.Store.News" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Results" EntityType="DB_9AA125_cornerfishingModel.Store.Results" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sponsors" EntityType="DB_9AA125_cornerfishingModel.Store.Sponsors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Teams" EntityType="DB_9AA125_cornerfishingModel.Store.Teams" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Results_ToEvents" Association="DB_9AA125_cornerfishingModel.Store.FK_Results_ToEvents">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Results_ToTeams" Association="DB_9AA125_cornerfishingModel.Store.FK_Results_ToTeams">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="EventName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="EventDate" Type="date" />
+    <Property Name="EventTime" Type="time" Precision="0" />
+    <Property Name="Location" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Headline" Type="varchar" MaxLength="200" />
+    <Property Name="NewsText" Type="varchar(max)" />
+    <Property Name="NewsDate" Type="date" />
+    <Property Name="Order" Type="int" />
+    <Property Name="EventID" Type="int" />
+    <Property Name="ImageLink" Type="varchar" MaxLength="300" />
+    <Property Name="FrontPage" Type="bit" />
+  </EntityType>
+  <EntityType Name="Results">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="int" Nullable="false" />
+    <Property Name="TeamID" Type="int" Nullable="false" />
+    <Property Name="FishCount" Type="int" />
+    <Property Name="BigFishlbs" Type="int" />
+    <Property Name="BigFishOz" Type="int" />
+    <Property Name="Totallbs" Type="int" />
+    <Property Name="TotalOz" Type="int" />
+    <Property Name="Points" Type="int" />
+    <Property Name="BonusPoints" Type="int" />
+  </EntityType>
+  <EntityType Name="Sponsors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Sponsor" Type="varchar" MaxLength="100" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="LogoPath" Type="varchar" MaxLength="200" />
+    <Property Name="Notes" Type="varchar" MaxLength="300" />
+    <Property Name="URL" Type="varchar" MaxLength="200" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TeamName" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_Results_ToEvents">
+    <End Role="Events" Type="DB_9AA125_cornerfishingModel.Store.Events" Multiplicity="1" />
+    <End Role="Results" Type="DB_9AA125_cornerfishingModel.Store.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Results_ToTeams">
+    <End Role="Teams" Type="DB_9AA125_cornerfishingModel.Store.Teams" Multiplicity="1" />
+    <End Role="Results" Type="DB_9AA125_cornerfishingModel.Store.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="TeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_GetEventResults" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EventID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetLastEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetNextEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetPointTotals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+</Schema>

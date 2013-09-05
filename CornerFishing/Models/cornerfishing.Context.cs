@@ -16,10 +16,10 @@ namespace CornerFishing.Models
     using System.Data.Objects.DataClasses;
     using System.Linq;
     
-    public partial class DB_9AA125_cornerfishingEntities : DbContext
+    public partial class cornerfishingEntities : DbContext
     {
-        public DB_9AA125_cornerfishingEntities()
-            : base("name=DB_9AA125_cornerfishingEntities")
+        public cornerfishingEntities()
+            : base("name=cornerfishingEntities")
         {
         }
     

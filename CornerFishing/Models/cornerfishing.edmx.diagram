@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="92b2d996e10c4b19bb30c5bae418a467" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_9AA125_cornerfishingModel.Event" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9AA125_cornerfishingModel.News" Width="1.5" PointX="1" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9AA125_cornerfishingModel.Result" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9AA125_cornerfishingModel.Sponsor" Width="1.5" PointX="4.875" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9AA125_cornerfishingModel.Team" Width="1.5" PointX="5.625" PointY="1.75" IsExpanded="true" />
-        <AssociationConnector Association="DB_9AA125_cornerfishingModel.FK_Results_ToEvents" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9AA125_cornerfishingModel.FK_Results_ToTeams" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="cornerfishingdb.Event" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cornerfishingdb.News" Width="1.5" PointX="1" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="cornerfishingdb.Result" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="cornerfishingdb.Sponsor" Width="1.5" PointX="4.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cornerfishingdb.Team" Width="1.5" PointX="5.625" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="cornerfishingdb.FK_Results_ToEvents" ManuallyRouted="false" />
+        <AssociationConnector Association="cornerfishingdb.FK_Results_ToTeams" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
