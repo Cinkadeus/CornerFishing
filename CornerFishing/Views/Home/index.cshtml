@@ -6,10 +6,6 @@
 
 @using CornerFishing.Models 
 
-<script type="text/javascript">
-	alert("This is a test page.  This site is not live or ready for production.  Please disregard any information posted here while this warning message is active.");
-</script>
-
 <h2>Current Season Standings</h2>
 
 <div>
@@ -32,7 +28,7 @@
                 
             <tr>
 				<td class="std">@team.Place </td>
-				<td class="team"><a href='@Url.Action("teamhome", "Home", new { id = team.id})'>@team.TeamName</a></td>
+				<td class="team"><a href='#'>@team.TeamName</a></td>
 				<td class="std">@team.TotalPoints</td>
 			</tr>
             
@@ -44,15 +40,16 @@
 
 </div>
 
+<br />
 			
-<h2>Test News Item #1</h2>
+<h2>CornerFishing.com Goes (Partially) Live!</h2>
 <div>
 	<div class="section">
 
-		<img src="http://www.bassfishingnerds.com/wp-content/uploads/night-bass-fishing.jpg" style="max-height:400px" />
+		<div style="text-align:center"><img src="http://i42.tinypic.com/2e1axed.png" style="max-height:400px" /></div>
 
 		<p>
-            This will be news Text
+            While still under construction, CornerFishing.com has gone live with event scores, weights, and season overall totals.  Check back often for further updates and added site functionality.
 		</p>
 
 	</div>
