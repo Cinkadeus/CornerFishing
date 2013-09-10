@@ -69,6 +69,7 @@
           <Property Name="Notes" Type="varchar" MaxLength="300" />
           <Property Name="URL" Type="varchar" MaxLength="200" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="TeamID" Type="int" />
         </EntityType>
         <EntityType Name="Teams">
           <Key>
@@ -110,6 +111,9 @@
         <Function Name="sp_GetLastEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetNextEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetPointTotals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetTeamName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -118,7 +122,6 @@
           <EntitySet Name="Events" EntityType="fishingModel.Event" />
           <EntitySet Name="News" EntityType="fishingModel.News" />
           <EntitySet Name="Results" EntityType="fishingModel.Result" />
-          <EntitySet Name="Sponsors" EntityType="fishingModel.Sponsor" />
           <EntitySet Name="Teams" EntityType="fishingModel.Team" />
           <AssociationSet Name="FK_Results_ToEvents" Association="fishingModel.FK_Results_ToEvents">
             <End Role="Events" EntitySet="Events" />
@@ -134,9 +137,13 @@
           <FunctionImport Name="sp_GetLastEvent" ReturnType="Collection(String)" />
           <FunctionImport Name="sp_GetNextEvent" ReturnType="Collection(String)" />
           <FunctionImport Name="sp_GetPointTotals" ReturnType="Collection(fishingModel.sp_GetPointTotals_Result)" />
-          <FunctionImport Name="sp_GetEventsForTeam">
+          <FunctionImport Name="sp_GetEventsForTeam" ReturnType="Collection(fishingModel.sp_GetEventsForTeam_Result)">
           <Parameter Name="TeamID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_GetTeamName" ReturnType="Collection(String)">
+          <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Sponsors" EntityType="fishingModel.Sponsors" />
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -178,18 +185,6 @@
           <Property Name="BonusPoints" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="fishingModel.FK_Results_ToEvents" FromRole="Results" ToRole="Events" />
           <NavigationProperty Name="Team" Relationship="fishingModel.FK_Results_ToTeams" FromRole="Results" ToRole="Teams" />
-        </EntityType>
-        <EntityType Name="Sponsor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Sponsor1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Phone" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
-          <Property Name="LogoPath" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="Notes" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
-          <Property Name="URL" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -240,6 +235,33 @@
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="Int32" Name="TotalPoints" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="sp_GetEventsForTeam_Result">
+          <Property Type="Int64" Name="Place" Nullable="true" />
+          <Property Type="String" Name="EventName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EventDate" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="FishCount" Nullable="true" />
+          <Property Type="String" Name="BigFish" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TotalWeight" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="Points" Nullable="true" />
+          <Property Type="Int32" Name="BonusPoints" Nullable="true" />
+          <Property Type="Int32" Name="TotalPoints" Nullable="true" />
+          <Property Type="Int32" Name="BigFishFlag" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Sponsors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Sponsor" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LogoPath" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Notes" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="URL" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -287,19 +309,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sponsors">
-            <EntityTypeMapping TypeName="fishingModel.Sponsor">
-              <MappingFragment StoreEntitySet="Sponsors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Sponsor1" ColumnName="Sponsor" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Teams">
             <EntityTypeMapping TypeName="fishingModel.Team">
               <MappingFragment StoreEntitySet="Teams">
@@ -335,7 +344,39 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetEventsForTeam" FunctionName="fishingModel.Store.sp_GetEventsForTeam" />
+          <FunctionImportMapping FunctionImportName="sp_GetEventsForTeam" FunctionName="fishingModel.Store.sp_GetEventsForTeam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fishingModel.sp_GetEventsForTeam_Result">
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="FishCount" ColumnName="FishCount" />
+                <ScalarProperty Name="BigFish" ColumnName="BigFish" />
+                <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+                <ScalarProperty Name="BigFishFlag" ColumnName="BigFishFlag" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetTeamName" FunctionName="fishingModel.Store.sp_GetTeamName" />
+          <EntitySetMapping Name="Sponsors">
+            <EntityTypeMapping TypeName="fishingModel.Sponsors">
+              <MappingFragment StoreEntitySet="Sponsors">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Sponsor" ColumnName="Sponsor" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -350,7 +391,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

@@ -28,7 +28,7 @@
                 
             <tr>
 				<td class="std">@team.Place </td>
-				<td class="team"><a href='#'>@team.TeamName</a></td>
+				<td class="team"><a href="@Url.Action("teamhome", "Home", new { id = @team.id })">@team.TeamName</a></td>
 				<td class="std">@team.TotalPoints</td>
 			</tr>
             

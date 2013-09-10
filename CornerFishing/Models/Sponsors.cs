@@ -12,14 +12,15 @@ namespace CornerFishing.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Sponsor
+    public partial class Sponsors
     {
         public int Id { get; set; }
-        public string Sponsor1 { get; set; }
+        public string Sponsor { get; set; }
         public string Phone { get; set; }
         public string LogoPath { get; set; }
         public string Notes { get; set; }
         public string URL { get; set; }
         public bool Active { get; set; }
+        public Nullable<int> TeamID { get; set; }
     }
 }

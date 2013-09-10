@@ -16,5 +16,11 @@ namespace CornerFishing.Controllers
             return View();
         }
 
+        public ActionResult teamhome(int id)
+        {
+            ViewBag.TeamID = id;
+            return View();
+        }
+
     }
 }
