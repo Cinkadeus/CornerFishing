@@ -1,0 +1,58 @@
+﻿@{
+	ViewBag.Title = "Corner Fishing Home";
+	Layout = "~/Views/Shared/_default.cshtml";
+    fishingDataEntity fish = new fishingDataEntity();
+    int teamID;
+    teamID = Convert.ToInt16(ViewBag.TeamID);
+}
+
+@using CornerFishing.Models 
+
+<h2>Current Season Standings</h2>
+
+<div>
+	<div class="section">
+		<b>Weights and Points of @fish.sp_GetLastEvent().FirstOrDefault()</b>
+
+        <table class="standings">
+			<thead>
+				<tr class="srow">
+					<th>Place</th>
+					<th>Event</th>
+                    <th>Fish<br />Count</th>
+                    <th>Big Fish</th>
+                    <th>Total Wgt</th>
+                    <th>Points</th>
+                    <th>Bonus</th>
+					<th>Total<br />Points</th>
+				</tr>
+			</thead>
+
+            @foreach (var result in fish.sp_GetEventsForTeam(teamID) )
+            {
+                
+            <tr>
+				<td class="std">@result.Place</td>
+				<td class="std">@result.TeamName</td>
+                <td class="std">@result.FishCount</td>
+                @if (result.BigFishFlag == 1)
+                {
+                    <td class="std" style="font-weight:bolder; width:150px">@result.BigFish</td>
+                }
+                else
+                {          
+                    <td class="std" style="width:150px">@result.BigFish</td>
+                }
+                
+                <td class="std" style="width:150px">@result.TotalWeight </td>
+                <td class="std">@result.Points </td>
+                <td class="std">@result.BonusPoints </td>
+				<td class="std">@result.TotalPoints</td>
+			</tr>
+            
+            }
+
+		</table>
+					
+	</div>
+</div>

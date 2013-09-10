@@ -104,6 +104,9 @@
         <Function Name="sp_GetEventResults" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_GetEventsForTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_GetLastEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetNextEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetPointTotals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -131,6 +134,9 @@
           <FunctionImport Name="sp_GetLastEvent" ReturnType="Collection(String)" />
           <FunctionImport Name="sp_GetNextEvent" ReturnType="Collection(String)" />
           <FunctionImport Name="sp_GetPointTotals" ReturnType="Collection(fishingModel.sp_GetPointTotals_Result)" />
+          <FunctionImport Name="sp_GetEventsForTeam">
+          <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -329,6 +335,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetEventsForTeam" FunctionName="fishingModel.Store.sp_GetEventsForTeam" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

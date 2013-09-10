@@ -57,5 +57,14 @@ namespace CornerFishing.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetPointTotals_Result>("sp_GetPointTotals");
         }
+    
+        public virtual int sp_GetEventsForTeam(Nullable<int> teamID)
+        {
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GetEventsForTeam", teamIDParameter);
+        }
     }
 }
