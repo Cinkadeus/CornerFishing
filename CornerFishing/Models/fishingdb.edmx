@@ -114,6 +114,9 @@
         <Function Name="sp_GetTeamName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TeamID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_GetTeamStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -144,6 +147,9 @@
           <Parameter Name="TeamID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Sponsors" EntityType="fishingModel.Sponsors" />
+          <FunctionImport Name="sp_GetTeamStats" ReturnType="Collection(fishingModel.sp_GetTeamStats_Result)">
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -262,6 +268,13 @@
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="Int32" Name="TeamID" />
         </EntityType>
+        <ComplexType Name="sp_GetTeamStats_Result">
+          <Property Type="Int32" Name="BigFishCount" Nullable="true" />
+          <Property Type="Int32" Name="Pts" Nullable="true" />
+          <Property Type="Int32" Name="BonusPoints" Nullable="true" />
+          <Property Type="String" Name="BiggestFish" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TotalWeight" Nullable="true" MaxLength="15" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -377,6 +390,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetTeamStats" FunctionName="fishingModel.Store.sp_GetTeamStats">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fishingModel.sp_GetTeamStats_Result">
+                <ScalarProperty Name="BigFishCount" ColumnName="BigFishCount" />
+                <ScalarProperty Name="Pts" ColumnName="Pts" />
+                <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+                <ScalarProperty Name="BiggestFish" ColumnName="BiggestFish" />
+                <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

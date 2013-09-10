@@ -31,8 +31,8 @@ namespace CornerFishing.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Result> Results { get; set; }
-        public DbSet<Sponsor> Sponsors { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Sponsors> Sponsors { get; set; }
     
         public virtual ObjectResult<sp_GetEventResults_Result> sp_GetEventResults(Nullable<int> eventID)
         {
@@ -58,13 +58,31 @@ namespace CornerFishing.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetPointTotals_Result>("sp_GetPointTotals");
         }
     
-        public virtual int sp_GetEventsForTeam(Nullable<int> teamID)
+        public virtual ObjectResult<sp_GetEventsForTeam_Result> sp_GetEventsForTeam(Nullable<int> teamID)
         {
             var teamIDParameter = teamID.HasValue ?
                 new ObjectParameter("TeamID", teamID) :
                 new ObjectParameter("TeamID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GetEventsForTeam", teamIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetEventsForTeam_Result>("sp_GetEventsForTeam", teamIDParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_GetTeamName(Nullable<int> teamID)
+        {
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_GetTeamName", teamIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetTeamStats_Result> sp_GetTeamStats(Nullable<int> teamID)
+        {
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetTeamStats_Result>("sp_GetTeamStats", teamIDParameter);
         }
     }
 }

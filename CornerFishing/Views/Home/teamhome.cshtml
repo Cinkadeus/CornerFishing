@@ -4,11 +4,33 @@
     fishingDataEntity fish = new fishingDataEntity();
     int teamID;
     teamID = Convert.ToInt16(ViewBag.TeamID);
+    var stats = fish.sp_GetTeamStats(teamID).FirstOrDefault() ;
+    var totalpts = stats.Pts + stats.BonusPoints;
 }
 
 @using CornerFishing.Models 
 
-<h2>Event Results for Team @fish.sp_GetTeamName(teamID).FirstOrDefault() </h2>
+<div class="teamname">Stats for Team @fish.sp_GetTeamName(teamID).FirstOrDefault()</div>
+
+<div class="stats">
+
+    @if (stats.BonusPoints == 0)
+    {
+        <div>Total Points: @stats.Pts</div> 
+    }
+    else
+    { 
+        <div>Total Points: @stats.Pts +  @stats.BonusPoints Bonus Points = @totalpts</div>
+    }
+
+    @if(stats.BigFishCount != 0)
+    {
+        <div>Tour Big Fish Count: @stats.BigFishCount</div>
+    }
+   
+    <div>Largest Catch: @stats.BiggestFish / Total Weight: @stats.TotalWeight</div>
+
+</div>
 
 <div>
 	<div class="section">

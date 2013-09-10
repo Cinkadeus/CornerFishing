@@ -27,6 +27,20 @@ img {
 table {
     border-collapse: collapse;
 }
+
+.teamname {
+    /*font-family:BookAntiqua-Bold;*/
+    color:#9f3805;
+    font-weight:bold;
+    font-size:28pt;
+
+}
+
+.stats {
+    color:#274346;
+    font-weight:bold;
+    font-size:20pt;
+}
  
 #clogo {
 	background:url(../Content/images/cornerjacketslogo.png) no-repeat;
@@ -142,6 +156,7 @@ table {
 	line-height:24px;
 	margin:0 0 12px;
 }
+
 div.purchase {
 	font-size:14px;
 	height:24px;
