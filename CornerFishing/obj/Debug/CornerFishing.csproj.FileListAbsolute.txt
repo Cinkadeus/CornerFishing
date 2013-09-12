@@ -62,3 +62,6 @@ C:\Users\JeLee\Desktop\GitHub\CornerFishing\CornerFishing\obj\Debug\CornerFishin
 C:\Users\JeLee\Desktop\GitHub\CornerFishing\CornerFishing\obj\Debug\CornerFishing.pdb
 C:\Users\JeLee\Desktop\GitHub\CornerFishing\CornerFishing\bin\EntityFramework.dll
 C:\Users\JeLee\Desktop\GitHub\CornerFishing\CornerFishing\bin\EntityFramework.xml
+C:\Development\CornerFishing\CornerFishing\obj\Debug\CornerFishing.csprojResolveAssemblyReference.cache
+C:\Development\CornerFishing\CornerFishing\obj\Debug\CornerFishing.dll
+C:\Development\CornerFishing\CornerFishing\obj\Debug\CornerFishing.pdb

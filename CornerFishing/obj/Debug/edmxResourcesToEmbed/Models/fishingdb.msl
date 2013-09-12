@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="fishingModelStoreContainer" CdmEntityContainer="fishingDataEntity">
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="fishingModel.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="fishingModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Headline" ColumnName="Headline" />
+          <ScalarProperty Name="NewsText" ColumnName="NewsText" />
+          <ScalarProperty Name="NewsDate" ColumnName="NewsDate" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="ImageLink" ColumnName="ImageLink" />
+          <ScalarProperty Name="FrontPage" ColumnName="FrontPage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Results">
+      <EntityTypeMapping TypeName="fishingModel.Result">
+        <MappingFragment StoreEntitySet="Results">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="FishCount" ColumnName="FishCount" />
+          <ScalarProperty Name="BigFishlbs" ColumnName="BigFishlbs" />
+          <ScalarProperty Name="BigFishOz" ColumnName="BigFishOz" />
+          <ScalarProperty Name="Totallbs" ColumnName="Totallbs" />
+          <ScalarProperty Name="TotalOz" ColumnName="TotalOz" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="fishingModel.Team">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEventResults" FunctionName="fishingModel.Store.sp_GetEventResults">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fishingModel.sp_GetEventResults_Result">
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="FishCount" ColumnName="FishCount" />
+          <ScalarProperty Name="BigFish" ColumnName="BigFish" />
+          <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+          <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+          <ScalarProperty Name="BigFishFlag" ColumnName="BigFishFlag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetLastEvent" FunctionName="fishingModel.Store.sp_GetLastEvent" />
+    <FunctionImportMapping FunctionImportName="sp_GetNextEvent" FunctionName="fishingModel.Store.sp_GetNextEvent" />
+    <FunctionImportMapping FunctionImportName="sp_GetPointTotals" FunctionName="fishingModel.Store.sp_GetPointTotals">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fishingModel.sp_GetPointTotals_Result">
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEventsForTeam" FunctionName="fishingModel.Store.sp_GetEventsForTeam">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fishingModel.sp_GetEventsForTeam_Result">
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="FishCount" ColumnName="FishCount" />
+          <ScalarProperty Name="BigFish" ColumnName="BigFish" />
+          <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+          <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+          <ScalarProperty Name="BigFishFlag" ColumnName="BigFishFlag" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetTeamName" FunctionName="fishingModel.Store.sp_GetTeamName" />
+    <EntitySetMapping Name="Sponsors">
+      <EntityTypeMapping TypeName="fishingModel.Sponsors">
+        <MappingFragment StoreEntitySet="Sponsors">
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Sponsor" ColumnName="Sponsor" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetTeamStats" FunctionName="fishingModel.Store.sp_GetTeamStats">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fishingModel.sp_GetTeamStats_Result">
+          <ScalarProperty Name="BigFishCount" ColumnName="BigFishCount" />
+          <ScalarProperty Name="Pts" ColumnName="Pts" />
+          <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+          <ScalarProperty Name="BiggestFish" ColumnName="BiggestFish" />
+          <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
