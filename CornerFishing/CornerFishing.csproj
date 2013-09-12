@@ -126,39 +126,52 @@
     </Compile>
     <Compile Include="Models\Event.cs">
       <DependentUpon>fishingdb.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\fishingdb.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>fishingdb.Context.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\fishingdb.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>fishingdb.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\fishingdb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>fishingdb.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\News.cs">
       <DependentUpon>fishingdb.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Result.cs">
       <DependentUpon>fishingdb.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Sponsor.cs">
+    <Compile Include="Models\Sponsors.cs">
       <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_GetEventResults_Result.cs">
       <DependentUpon>fishingdb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\sp_GetEventsForTeam_Result.cs">
+      <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_GetPointTotals_Result.cs">
+      <DependentUpon>fishingdb.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\sp_GetTeamStats_Result.cs">
       <DependentUpon>fishingdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Team.cs">
       <DependentUpon>fishingdb.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -179,6 +192,19 @@
     <Content Include="Content\menu.css" />
     <Content Include="Global.asax" />
     <Content Include="js\menu.js" />
+    <Content Include="Models\fishingdb.Context.tt">
+      <DependentUpon>fishingdb.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>fishingdb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\fishingdb.edmx.diagram">
+      <DependentUpon>fishingdb.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\fishingdb.tt">
+      <DependentUpon>fishingdb.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>fishingdb.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -221,31 +247,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\fishingdb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>fishingdb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\fishingdb.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>fishingdb.edmx</DependentUpon>
-      <LastGenOutput>fishingdb.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\fishingdb.edmx.diagram">
-      <DependentUpon>fishingdb.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\fishingdb.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>fishingdb.edmx</DependentUpon>
-      <LastGenOutput>fishingdb.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_adminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\fishingdb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>fishingdb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
